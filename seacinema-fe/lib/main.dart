@@ -124,17 +124,20 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 14),
             SizedBox(
               height: 32,
-              child: ListView.separated(
+              child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(left: index == 0 ? 14 : 0),
+                  padding: EdgeInsets.only(
+                    left: index == 0 ? 14 : 10,
+                    right: index == 3 ? 14 : 0,
+                  ),
                   child: FilledButton.tonal(
                     onPressed: () {},
                     child: const Text("Action"),
                   ),
                 ),
-                separatorBuilder: (context, index) => const SizedBox(width: 10),
+                // separatorBuilder: (context, index) => const SizedBox(width: 10),
                 itemCount: 4,
               ),
             ),
@@ -151,17 +154,20 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             const SizedBox(height: 14),
-            Container(
-              width: 40,
-              height: 40,
-              margin: const EdgeInsets.only(right: 14),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage(
-                      "assets/illustration/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg"),
-                  fit: BoxFit.cover,
-                ),
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return ItemCover(
+                    margin: EdgeInsets.only(
+                      left: 14,
+                      right: index == 3 ? 14 : 0,
+                    ),
+                  );
+                },
+                itemCount: 4,
               ),
             ),
             const CircleAvatar(
@@ -173,6 +179,46 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ItemCover extends StatelessWidget {
+  const ItemCover({
+    super.key,
+    required this.margin,
+  });
+
+  final EdgeInsets margin;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 150,
+          height: 225,
+          margin: margin,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            image: const DecorationImage(
+              image: AssetImage(
+                "assets/illustration/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const Spacer(),
+        const Text(
+          "Mario Bros",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }
