@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 26),
+            const SizedBox(height: 32),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 14),
               child: Text(
@@ -137,11 +137,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const Text("Action"),
                   ),
                 ),
-                // separatorBuilder: (context, index) => const SizedBox(width: 10),
                 itemCount: 4,
               ),
             ),
-            const SizedBox(height: 26),
+            const SizedBox(height: 32),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 14),
               child: Text(
@@ -170,12 +169,35 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemCount: 4,
               ),
             ),
-            const CircleAvatar(
-              backgroundImage: AssetImage(
-                  "assets/illustration/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg"),
+            const SizedBox(height: 24),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14),
+              child: Text(
+                "Favorite Movies",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            FilledButton.tonal(onPressed: () {}, child: const Text("data")),
-            const SizedBox(height: 40)
+            const SizedBox(height: 14),
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return ItemCover(
+                    margin: EdgeInsets.only(
+                      left: 14,
+                      right: index == 3 ? 14 : 0,
+                    ),
+                  );
+                },
+                itemCount: 4,
+              ),
+            ),
           ],
         ),
       ),
